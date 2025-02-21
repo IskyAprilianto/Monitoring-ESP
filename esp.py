@@ -6,11 +6,11 @@ from machine import Pin
 from umqtt.simple import MQTTClient
 
 # WiFi Configuration
-SSID = "Dharma 4"  # Ganti dengan nama WiFi kamu
-PASSWORD = "0818881210"  # Ganti dengan password WiFi kamu
+SSID = "Dharma 4"  
+PASSWORD = "0818881210"  
 
 # Ubidots Configuration
-TOKEN = "BBUS-X22dYuktZNwot2UyXDlW0br7H6FOIF"  # Ganti dengan token Ubidots kamu
+TOKEN = "BBUS-X22dYuktZNwot2UyXDlW0br7H6FOIF"  
 MQTT_BROKER = "industrial.api.ubidots.com"
 DEVICE_LABEL = "sensor_esp"
 VARIABLE_SUHU = "Suhu"
@@ -18,11 +18,11 @@ VARIABLE_KELEMBABAN = "Kelembaban"
 VARIABLE_JARAK = "Jarak"
 
 # Inisialisasi Sensor DHT11
-dht_sensor = dht.DHT11(Pin(4))  # Pastikan DHT11 terhubung ke GPIO4
+dht_sensor = dht.DHT11(Pin(4))  
 
 # Inisialisasi Sensor Ultrasonik
-TRIG = Pin(18, Pin.OUT)  # Trig di GPIO14
-ECHO = Pin(21, Pin.IN)   # Echo di GPIO12
+TRIG = Pin(18, Pin.OUT)  
+ECHO = Pin(21, Pin.IN)  
 
 # Fungsi untuk koneksi ke WiFi
 def connect_wifi():
@@ -59,7 +59,7 @@ def get_distance():
         end = time.ticks_us()
     
     duration = end - start
-    distance = (duration * 0.0343) / 2  # Konversi ke cm
+    distance = (duration * 0.0343) / 2  
     return round(distance, 2)
 
 # Fungsi untuk mengirim data ke Ubidots
@@ -80,7 +80,7 @@ def send_data():
         else:
             print("Sensor Error: Data tidak terkirim")
 
-        time.sleep(5)  # Kirim data setiap 5 detik
+        time.sleep(5) 
 
 # Jalankan program
 connect_wifi()
