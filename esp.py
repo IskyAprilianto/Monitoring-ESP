@@ -6,8 +6,8 @@ from machine import Pin
 from umqtt.simple import MQTTClient
 
 # WiFi Configuration
-SSID = "Mochi"  # Ganti dengan nama WiFi kamu
-PASSWORD = "cukipuki"  # Ganti dengan password WiFi kamu
+SSID = "Dharma 4"  # Ganti dengan nama WiFi kamu
+PASSWORD = "0818881210"  # Ganti dengan password WiFi kamu
 
 # Ubidots Configuration
 TOKEN = "BBUS-X22dYuktZNwot2UyXDlW0br7H6FOIF"  # Ganti dengan token Ubidots kamu
