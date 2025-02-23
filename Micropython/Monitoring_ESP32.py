@@ -144,7 +144,7 @@ def send_data_to_flask():
         except Exception as e:
             print(f"Gagal mengirim data ke Flask: {e}")
 
-        time.sleep(5) 
+        time.sleep(20) 
 
 # **Jalankan Program**
 connect_wifi()
