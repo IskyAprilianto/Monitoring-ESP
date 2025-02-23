@@ -1,5 +1,5 @@
 from flask import Flask, request, jsonify
-from mongo import save_to_mongo, get_all_data  # Import fungsi dari mongo.py
+from mongo import save_to_mongo, get_all_data  
 
 app = Flask(__name__)
 
@@ -9,7 +9,7 @@ def receive_data():
     try:
         data = request.json
         print(f"Data diterima: {data}")
-        save_to_mongo(data)  # Simpan ke MongoDB
+        save_to_mongo(data)  
         return jsonify({"message": "Data berhasil disimpan ke MongoDB Atlas"}), 200
     except Exception as e:
         print(f"Error menerima data: {e}")

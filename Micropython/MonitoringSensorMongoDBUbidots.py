@@ -9,18 +9,18 @@ from machine import Pin, ADC
 SSID = "Y"
 PASSWORD = "Isky12345678"
 
-# **Flask API Endpoint** (Ganti IP dengan Flask Server)
+# **Flask API Endpoint** 
 FLASK_SERVER = "http://192.168.76.222:5000/send-data"
 
 # **Inisialisasi Sensor**
 ldr = ADC(Pin(34))
 ldr.atten(ADC.ATTN_11DB)
-dht_sensor = dht.DHT11(Pin(4))  # Pastikan pin sesuai dengan wiring
+dht_sensor = dht.DHT11(Pin(4))  
 pir_sensor = Pin(12, Pin.IN)
 
-# **Inisialisasi Sensor Ultrasonik**
-trig_pin = Pin(5, Pin.OUT)  # Pin untuk Trig
-echo_pin = Pin(18, Pin.IN)   # Pin untuk Echo
+# **Sensor Ultrasonik**
+trig_pin = Pin(5, Pin.OUT) 
+echo_pin = Pin(18, Pin.IN)  
 
 # **Koneksi ke WiFi**
 def connect_wifi():
@@ -32,48 +32,48 @@ def connect_wifi():
         time.sleep(1)
     print("WiFi Connected:", wlan.ifconfig())
 
-# **Membaca sensor DHT11 dan lainnya**
+# **Membaca sensor**
 def get_sensor_data():
     try:
-        time.sleep(2)  # Delay sebelum membaca sensor
+        time.sleep(2) 
         dht_sensor.measure()
         suhu = dht_sensor.temperature()
         kelembaban = dht_sensor.humidity()
     except OSError:
         print("Gagal membaca sensor DHT11!")
-        suhu, kelembaban = None, None  # Beri nilai default jika gagal
+        suhu, kelembaban = None, None  
 
     ldr_value = ldr.read()
     gerakan = pir_sensor.value()
-    jarak = get_distance()  # Mengambil data jarak dari sensor ultrasonik
+    jarak = get_distance() 
 
     return {
         "LDR": ldr_value,
-        "Suhu": suhu if suhu is not None else 0,  # Jika None, beri nilai 0
+        "Suhu": suhu if suhu is not None else 0, 
         "Kelembaban": kelembaban if kelembaban is not None else 0,
         "Gerakan": gerakan,
-        "Jarak": jarak  # Tambahkan data jarak
+        "Jarak": jarak  
     }
 
 # **Mengukur Jarak dengan Sensor Ultrasonik**
 def get_distance():
-    # Kirimkan pulsa trigger
+   
     trig_pin.value(0)
     time.sleep_us(2)
     trig_pin.value(1)
     time.sleep_us(10)
     trig_pin.value(0)
 
-    # Mengukur durasi pulsa echo
+    # Mengukur durasi echo
     start_time = time.ticks_us()
     while echo_pin.value() == 0:
-        start_time = time.ticks_us()  # Menunggu pulsa mulai
+        start_time = time.ticks_us() 
     while echo_pin.value() == 1:
-        end_time = time.ticks_us()  # Menunggu pulsa selesai
+        end_time = time.ticks_us() 
 
-    # Hitung durasi pulsa
+    # Hitung durasi
     duration = time.ticks_diff(end_time, start_time)
-    distance = (duration * 0.0343) / 2  # Kecepatan suara adalah 343 m/s
+    distance = (duration * 0.0343) / 2 
     return distance
 
 # **Cek koneksi ke Flask sebelum mengirim data**
@@ -103,7 +103,7 @@ def send_data_to_flask():
         except Exception as e:
             print(f"Gagal mengirim data ke Flask: {e}")
 
-        time.sleep(5)  # Kirim data setiap 5 detik
+        time.sleep(5)  
 
 # **Jalankan Program**
 connect_wifi()

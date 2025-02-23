@@ -6,8 +6,8 @@ uri = "mongodb+srv://StarlithMonitoring:Starlith136@monitoringesp32starlith.bmcw
 
 # **Koneksi ke MongoDB**
 client = MongoClient(uri, server_api=ServerApi('1'))
-db = client["MonitoringESP32Starlith"]  # Nama database
-collection = db["sensor_data"]  # Nama collection
+db = client["MonitoringESP32Starlith"]  
+collection = db["sensor_data"]  
 
 # **Simpan data ke MongoDB**
 def save_to_mongo(data):
@@ -20,7 +20,7 @@ def save_to_mongo(data):
 # **Ambil semua data dari MongoDB**
 def get_all_data():
     try:
-        data = list(collection.find({}, {"_id": 0}))  # Hapus _id
+        data = list(collection.find({}, {"_id": 0}))  
         return data
     except Exception as e:
         print(f"Error mengambil data dari MongoDB: {e}")
